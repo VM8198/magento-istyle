@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amshopby>
+            <general>
+                <ajax_enabled>0</ajax_enabled>
+                <ajax_scroll_up>1</ajax_scroll_up>
+                <enable_price_slider>0</enable_price_slider>
+                <price_slider_step>1</price_slider_step>
+                <enable_overflow_scroll>0</enable_overflow_scroll>
+            </general>
+        </amshopby>
+    </default>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_ShopbyLite::css/chosen/chosen.css"/>
+    </head>
+    <body>
+        <referenceContainer name="sidebar.main">
+            <block class="Amasty\ShopbyLite\Block\Navigation\Component\FilterCollapsing\Search" name="catalog.navigation.collapsing" after="catalogsearch.leftnav"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Amasty\ShopbyLite\Block\Navigation\Component\JsInit" name="amasty.shopby.jsinit" after="-"/>
+            <block class="Amasty\ShopbyLite\Block\Navigation\Component\Ajax" name="category.amshopbylite.ajax" template="Amasty_ShopbyLite::navigation/ajax.phtml" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

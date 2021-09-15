@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\LayeredNavigation\Block\Navigation\FilterRenderer"
+                type="Amasty\ShopbyLite\Block\Navigation\FilterRenderer"/>
+    <preference for="Magento\Swatches\Block\LayeredNavigation\RenderLayered"
+                type="Amasty\ShopbyLite\Block\Navigation\SwatchRenderer"/>
+    <preference for="Magento\LayeredNavigation\Block\Navigation\State"
+                type="Amasty\ShopbyLite\Block\Navigation\State"/>
+    <preference for="Magento\CatalogSearch\Controller\Result\Index"
+                type="Amasty\ShopbyLite\Controller\Search\Result\Index"/>
+
+    <virtualType name="categoryFilterList" type="Amasty\ShopbyLite\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Category</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="searchFilterList" type="Amasty\ShopbyLite\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Category</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\ShopbyLite\Block\Navigation\Component\FilterCollapsing\Category"
+                 type="Amasty\ShopbyLite\Block\Navigation\Component\FilterCollapsing">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\ShopbyLite\Block\Navigation\Component\FilterCollapsing\Search"
+                 type="Amasty\ShopbyLite\Block\Navigation\Component\FilterCollapsing">
+        <arguments>
+            <argument name="filterList" xsi:type="object">searchFilterList</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\App\FrontController">
+        <plugin name="Amasty_ShopbyLite::ParseAmshopbyParams" type="Amasty\ShopbyLite\Plugin\Framework\App\FrontController"/>
+    </type>
+
+    <virtualType name="Amasty\ShopbyLite\Model\Layer\Filter\ItemFactory"
+                 type="Magento\Catalog\Model\Layer\Filter\ItemFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\Layer\Filter\Item</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\ShopbyLite\Model\Layer\Filter\Attribute">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\ShopbyLite\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyLite\Model\Layer\Filter\Price">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\ShopbyLite\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyLite\Model\Layer\Filter\Decimal">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\ShopbyLite\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyLite\Model\Layer\Filter\Category">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\ShopbyLite\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyLite\Block\Navigation\SwatchRenderer">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlBuilderHelper" xsi:type="object">Amasty\ShopbyLite\Helper\UrlBuilder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Search\Adapter\Mysql\Aggregation\Builder\Dynamic">
+        <plugin name="Amasty_ShopbyLite::changeAggregationForSliders"
+                type="Amasty\ShopbyLite\Plugin\Framework\Search\Adapter\Mysql\Aggregation\Builder\Dynamic"/>
+    </type>
+    <type name="Magento\Framework\Search\Dynamic\Algorithm\Repository">
+        <plugin name="Amasty_ShopbyLite::DynamicAlgorithmRepositoryAroundGet"
+                type="Amasty\ShopbyLite\Plugin\Framework\Search\Dynamic\Algorithm\Repository"/>
+    </type>
+    <type name="Magento\Framework\View\Page\Config\Renderer">
+        <plugin name="Amasty_ShopbyLite::make-css" type="Amasty\ShopbyLite\Plugin\View\Page\Config\Renderer" />
+    </type>
+    <type name="Magento\Catalog\Model\CategoryRepository">
+        <plugin name="Amasty_ShopbyLite::CategoryRepositoryGet"
+                type="Amasty\ShopbyLite\Plugin\Catalog\Model\CategoryRepository"/>
+    </type>
+
+    <!-- plugins for preparing slider data for elasticsearch engines -->
+    <type name="Magento\Elasticsearch\SearchAdapter\Aggregation\Builder\Dynamic">
+        <plugin name="Amasty_ShopbyLite::AggregationDynamicAddTotals"
+                type="Amasty\ShopbyLite\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Dynamic"/>
+    </type>
+    <type name="Mirasvit\SearchElastic\Adapter\Aggregation\DynamicBucket">
+        <plugin name="Amasty_ShopbyLite::MirasvitAggregationDynamicAddTotals"
+                type="Amasty\ShopbyLite\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Dynamic"/>
+    </type>
+    <type name="Amasty\ElasticSearch\Model\Search\GetResponse\GetAggregations">
+        <plugin name="Amasty_ShopbyLite::ElasticAggregationDynamicAddTotals"
+                type="Amasty\ShopbyLite\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Dynamic"/>
+    </type>
+    <!-- end plugins for preparing slider data for elasticsearch engines -->
+
+    <!-- plugins for convert html into json needed for ajax filtration -->
+    <type name="Magento\Catalog\Controller\Category\View">
+        <plugin name="Amasty_ShopbyLite::ajaxInject" type="Amasty\ShopbyLite\Plugin\Ajax\CategoryViewAjax"/>
+    </type>
+    <type name="Amasty\ShopbyLite\Controller\Search\Result\Index">
+        <plugin name="Amasty_ShopbyLite::ajaxSearchInject" type="Amasty\ShopbyLite\Plugin\Ajax\CategoryViewAjax"/>
+    </type>
+    <type name="Amasty\ShopbyBrand\Controller\Index\Index">
+        <plugin name="Amasty_ShopbyLite::ajaxShopbybrandInject" type="Amasty\ShopbyLite\Plugin\Ajax\CategoryViewAjax"/>
+    </type>
+    <type name="Amasty\Finder\Controller\Index\Index">
+        <plugin name="Amasty_ShopbyLite::ajaxFinderInject" type="Amasty\ShopbyLite\Plugin\Ajax\CategoryViewAjax" />
+    </type>
+    <type name="Amasty\Xlanding\Controller\Page\View">
+        <plugin name="Amasty_ShopbyLite::ajaxLandingInject" type="Amasty\ShopbyLite\Plugin\Ajax\CategoryViewAjax"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Amasty_ShopbyLite::wrapProductList" type="Amasty\ShopbyLite\Plugin\Ajax\ProductListWrapper"/>
+    </type>
+    <type name="Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="Amasty_ShopbyLite::wrapCmsBlock" type="Amasty\ShopbyLite\Plugin\Ajax\ProductListWrapper"/>
+    </type>
+    <!-- end plugins needed for ajax filtration -->
+</config>

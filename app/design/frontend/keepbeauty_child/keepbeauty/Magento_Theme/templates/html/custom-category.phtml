@@ -1,0 +1,29 @@
+<div class="Popular-category">
+<div class="block-title"><strong>POPULAR CATEGORIES</strong></div>
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToSelect('*');
+?>
+<ul>
+<?php 
+$counter = 0;
+foreach ($categories as $category) {
+if($counter < 8){ //show the first 6 items
+?>
+<li>
+<a href="<?php echo $category->getUrl(); ?>"><?php echo ($category->getName()); ?>
+<?php echo ($category->getImageUrl()); ?>
+</a>
+</li>
+<?php
+}
+$counter++;//add a counter
+}
+?>
+</ul>
+</div>
+
+

@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div class="footer-custom">
+<div class="footer-container">
+<?php 
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer-top')->toHtml();
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer-medium')->toHtml();
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer-last')->toHtml();
+?>
+</div>
+</div>

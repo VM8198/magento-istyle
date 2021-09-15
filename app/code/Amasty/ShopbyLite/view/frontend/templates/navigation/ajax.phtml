@@ -1,0 +1,24 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+?>
+<?php
+/** @var \Amasty\ShopbyLite\Block\Navigation\Component\Ajax $block */
+?>
+<?php if ($block->canShowBlock()) : ?>
+    <script type="text/x-magento-init">
+    {
+        "body.page-with-filter, body.catalogsearch-result-index": {
+            "amShopbyAjax": {
+                    "scrollUp": <?= (int)$block->scrollUp() ?>,
+                    "clearUrl": "<?= $block->escapeUrl($block->getClearUrl());?>",
+                    "currentCategoryId": "<?= /* @noEscape */ $block->getCurrentCategoryId();?>",
+                    "isCategorySingleSelect": "<?= /* @noEscape */ $block->isCategorySingleSelect();?>"
+                }
+            }
+    }
+    </script>
+<?php endif; ?>

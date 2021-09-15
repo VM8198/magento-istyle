@@ -1,0 +1,83 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt()
+?>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?= $block->escapeHtml(__('Toggle Nav')) ?></span></span>
+<a
+    class="logo"
+    href="<?= $block->escapeUrl($block->getUrl('')) ?>"
+    title="<?= $block->escapeHtmlAttr($storeName) ?>"
+    aria-label="store logo">
+    <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"
+         title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+         alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+            <?= $block->getLogoWidth() ? 'width="' . $block->escapeHtmlAttr($block->getLogoWidth()) . '"' : '' ?>
+            <?= $block->getLogoHeight() ? 'height="' . $block->escapeHtmlAttr($block->getLogoHeight()) . '"' : '' ?>
+    />
+</a>
+
+<div class="mobile-header">
+
+<div class="lower-section">
+<?php $columnsLimit = $block->getColumnsLimit() ? : 0; ?>
+<?php $_menu2 = $block->getHtml('level-top', 'mega', $columnsLimit) ?>
+<?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit) ?>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>	 
+	  <?php  echo $this->getLayout()->createBlock("Magento\Theme\Block\Html\Topmenu")->setTemplate("Ibnab_MegaMenu::html/top-mega.phtml")->toHtml();
+ ?>
+
+</div>
+
+
+<div class="mobile-box">
+	<div class="trigger">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+	</div>
+	<div class="mobile-logo">
+    <a
+    class="logo"
+    href="<?= $block->escapeUrl($block->getUrl('')) ?>"
+    title="<?= $block->escapeHtmlAttr($storeName) ?>"
+    aria-label="store logo">
+    <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"
+         title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+         alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+            <?= $block->getLogoWidth() ? 'width="' . $block->escapeHtmlAttr($block->getLogoWidth()) . '"' : '' ?>
+            <?= $block->getLogoHeight() ? 'height="' . $block->escapeHtmlAttr($block->getLogoHeight()) . '"' : '' ?>
+    />
+</a>
+	</div>
+	<div class="mobile-cart">
+		<?php echo $this->getLayout()->createBlock("Magento\Checkout\Block\Cart\Sidebar")->setTemplate("Magento_Checkout::cart/minicart.phtml")->toHtml(); ?>
+	</div>
+
+</div>
+
+<div class="serarch-box">
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Search::form.mini.phtml")->toHtml(); ?>
+</div>
+
+<script>
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+</script>
+
+</div>
+
+</div>

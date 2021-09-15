@@ -1,0 +1,8 @@
+
+fieldset[id^="amshopbylite_improved_layered_navigation"] tr[id*="not_instaled"] .value{
+    color: #f70606;
+}
+
+fieldset[id^="amshopbylite_improved_layered_navigation"] tr[id*="is_instaled"] .value{
+    color: #00f702;
+}

@@ -1,0 +1,25 @@
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"You have Improved Layered Navigation extension installed. Please disable Lite Layered Navigation extension for correct work. You can do it using command: php bin/magento module:disable Amasty_ShopbyLite","You have Improved Layered Navigation extension installed. Please disable Lite Layered Navigation extension for correct work. You can do it using command: php bin/magento module:disable Amasty_ShopbyLite"
+"%1 - %2","%1 - %2"
+above,above
+"Make sure that ""%1"" attribute can be used in layered navigation","Make sure that ""%1"" attribute can be used in layered navigation"
+Category,Category
+"%1 and above","%1 and above"
+"You have Improved Layered Navigation extension installed. Please disable Lite Layered Navigation extension for correct work.","You have Improved Layered Navigation extension installed. Please disable Lite Layered Navigation extension for correct work."
+"Bucket does not exist","Bucket does not exist"
+item,item
+items,items
+"Now Shopping by","Now Shopping by"
+Previous,Previous
+Remove,Remove
+"Remove This Item","Remove This Item"
+"Lite Layered Navigation","Lite Layered Navigation"
+Information,Information
+General,General
+"Enable Ajax","Enable Ajax"
+"Scroll to top after AJAX load","Scroll to top after AJAX load"
+"Add Vertical Scrolling to Filter Block After","Add Vertical Scrolling to Filter Block After"
+"Set maximum box height in px, to disable enter 0.","Set maximum box height in px, to disable enter 0."
+"Enable Multiselect for Filters","Enable Multiselect for Filters"
+"Enable Price Slider","Enable Price Slider"
+"Price Slider Step","Price Slider Step"

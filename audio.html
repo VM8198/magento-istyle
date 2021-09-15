@@ -1,0 +1,147 @@
+<html>
+<head>
+
+<script>
+function toggleSection(sectionID) {
+    var sa = new Array('home','services','portfolio','contact');
+    for (s in sa) {
+        document.getElementById(sa[s]).style.display = 'none';
+    }
+   var myTarget = document.getElementById(sectionID);
+   myTarget.style.display = 'block';
+}
+</script>
+</head>
+  
+<body>
+<div align="right" id="pageAudio">
+  <!-- Music -->
+  
+  <button id="playpausebtn"></button>
+  <button id="mutebtn"></button>
+  
+  </div>
+
+  <div id="pageHeader">
+  <h1 style="display:inline;">Site Logo</h1><br/><h3>You can change tabs and the music will continue to play</h3>
+  <p style="display:inline;">
+  <a href="#" onclick="return false" onmousedown="javascript:toggleSection('home');">Home</a> &nbsp; &nbsp;
+  <a href="#" onclick="return false" onmousedown="javascript:toggleSection('services');">Services</a> &nbsp; &nbsp; 
+  <a href="#" onclick="return false" onmousedown="javascript:toggleSection('portfolio');">Portfolio</a> &nbsp; &nbsp; 
+  <a href="#" onclick="return false" onmousedown="javascript:toggleSection('contact');">Contact</a></p>
+</div>
+<div id="pageBody">
+  <div id="home" class="section" style="display:block;">Home Page Content Goes Here<br></br>You can click fromt he topright corner play/pause || sound/mute</div>
+  <div id="services" class="section">Services Page Content Goes Here <br></br>You can click fromt he topright corner play/pause || sound/mute</div>
+  <div id="portfolio" class="section">Portfolio Page Content Goes Here <br></br>You can click fromt he topright corner play/pause || sound/mute</div>
+  <div id="contact" class="section">Contact Page Content Goes Here <br></br>You can click fromt he topright corner play/pause || sound/mute</div>
+</div>
+<div id="pageFooter">
+  
+<div id="footer">
+    <h5><a href="http://www.eleftheriabatsou.com" target="_blank">Eleftheria</a> | <a href="https://codepen.io/EleftheriaBatsou" target="_blank">Projects</a> | <a href="https://www.youtube.com/channel/UCC-WwYv3DEW7Nkm_IP6VeQQ" target="_blank"> Coding videos </a></h5>
+  </div> <!-- end footer -->  
+  
+  
+</div>
+</body>
+</html>
+
+<style>
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+  width:100%;
+  height: 100%;
+}
+#pageAudio{
+	width:90%; margin:auto; padding:10px;
+}
+#pageHeader {
+	width:90%; margin:auto; background-color: #d09693; padding:10px;
+}
+#pageBody {
+	width:90%; margin:auto; background-color:#FFF; padding:10px;
+}
+#pageFooter {
+	width:90%; margin:auto; background-color: #d09693; padding:10px;
+}
+.section{
+        display: none;
+	padding:10px;
+	font-size:18px; 
+	height:200px;
+}
+
+/* new code */
+
+body{ 
+   background-image: linear-gradient(to top, #c71d6f 0%, #d09693 100%);
+  background-repeat: no-repeat;
+ 
+   background-size: contain;
+   background-attachment: fixed; 
+   color: #c71d6f;
+}
+
+
+button{ border:none; cursor:pointer; outline:none; }
+
+button#playpausebtn{	background:url(https://image.flaticon.com/icons/svg/189/189889.svg) no-repeat;
+	width:30px;
+	height:30px;
+ 
+}
+
+button#mutebtn{	background:url(https://image.flaticon.com/icons/svg/204/204287.svg) no-repeat;
+	width:30px;
+	height:30px;
+}
+
+
+a:link{ color: #000; }
+a:hover{ background: #fff; }
+a:visited{ color: #000; }
+a:active{ background: #EEFFA8; }
+
+#footer {color: #000}
+#footer a:link{ color: #000; }
+#footer a:hover{ background: #fff; }
+#footer a:visited{ color: #000; }
+#footer a:active{ background: #EEFFA8; }
+</style>
+<script>
+var audio, playbtn, mutebtn, seek_bar;
+function initAudioPlayer(){
+	audio = new Audio();
+	audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
+	audio.loop = true;
+	audio.play();
+	// Set object references
+	playbtn = document.getElementById("playpausebtn");
+	mutebtn = document.getElementById("mutebtn");
+	// Add Event Handling
+	playbtn.addEventListener("click",playPause);
+	mutebtn.addEventListener("click", mute);
+	// Functions
+	function playPause(){
+		if(audio.paused){
+		    audio.play();
+		    playbtn.style.background = "url(https://image.flaticon.com/icons/svg/189/189889.svg) no-repeat";
+	    } else {
+		    audio.pause();
+		    playbtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148744.svg) no-repeat";
+	    }
+	}
+	function mute(){
+		if(audio.muted){
+		    audio.muted = false;
+		    mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/204/204287.svg) no-repeat";
+	    } else {
+		    audio.muted = true;
+		    mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148757.svg) no-repeat";
+	    }
+	}
+}
+window.addEventListener("load", initAudioPlayer);
+</script>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amshopby" translate="label" type="text" sortOrder="121214" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_ShopbyLite::config</resource>
+            <class>separator-top</class>
+            <label>Lite Layered Navigation</label>
+            <tab>amasty</tab>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\ShopbyLite\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="ajax_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable this option to let customers apply filters without page reloads.</comment>
+                </field>
+                <field id="ajax_scroll_up" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Scroll to top after AJAX load</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="ajax_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="enable_overflow_scroll" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Vertical Scrolling to Filter Block After</label>
+                    <comment>Set maximum box height in px, to disable enter 0.</comment>
+                    <validate>validate-zero-or-greater</validate>
+                </field>
+                <field id="multiselect_filter_list" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Multiselect for Filters</label>
+                    <source_model>Amasty\ShopbyLite\Model\Source\Attribute</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="enable_price_slider" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Price Slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="price_slider_step" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price Slider Step</label>
+                    <validate>validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enable_price_slider">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,15 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+if($customerSession->isLoggedIn()) : ?>
+<li>
+	<a class= "header_account_link" href="<?php echo $this->getUrl("customer/account/logout");?>"><?php echo __('Logout')?></a>
+</li>
+<?php else: ?>
+<li>
+	<a class= "header_account_link" href="<?php echo $this->getUrl("customer/account/login");?>"><?php echo __('Log in')?></a>
+</li>
+<li>
+	<a class= "header_account_link" href="<?php echo $this->getUrl("customer/account/create");?>"><?php echo __('Sign Up')?></a>
+</li>
+<?php endif; ?>

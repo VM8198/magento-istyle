@@ -1,0 +1,64 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+?>
+<?php
+/** @var \Amasty\ShopbyLite\Block\Navigation\FilterRenderer $block */
+
+$filterUniqId = $block->escapeId(uniqid());
+$filterCode = $block->getFilter()->getRequestVar();
+?>
+
+<ol class="items am-filter-items-<?= $block->escapeHtml($filterCode) ?>"
+    <?php if ($block->getScrollOverflow()) : ?>
+        style="max-height:<?= $block->escapeHtml($block->getScrollOverflow()) ?>px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: hidden;"
+    <?php endif; ?>>
+
+    <form data-am-js="am-ranges"
+          data-amshopby-filter="<?= $block->escapeHtml($filterCode) ?>"
+          data-amshopby-filter-request-var="<?= $block->escapeHtml($block->getFilter()->getRequestVar()) ?>"
+          autocomplete="off">
+        <?php /** @var \Amasty\ShopbyLite\Model\Layer\Filter\Item $filterItem */?>
+        <?php foreach ($filterItems as $filterItem) : ?>
+            <?php $uniqId = uniqid(); ?>
+            <?php $inputType = $block->getFilter()->isMultiSelectAllowed() ? 'checkbox' : 'radio' ?>
+        <li class="item" data-label="<?= $block->escapeHtml($filterItem->getOptionLabel())?>">
+            <?php if ($filterItem->getCount() >= 0) : ?>
+                <a
+                    class="am-filter-item-<?= $block->escapeHtml($uniqId)?>"
+                    data-am-js="filter-item-default"
+                    href="<?= $block->escapeUrl($filterItem->getUrl()) ?>"
+                >
+                    <input
+                        name="amshopby[<?= $block->escapeHtml($block->getFilter()->getRequestVar());?>][]"
+                        value="<?= $block->escapeHtml($filterItem->getValueString());?>"
+                        type="<?= /* @noEscape */ $inputType;?>"
+                        <?= /* @escapeNotVerified */ $filterItem->isSelected() ? ' checked' : ''; ?>
+                    />
+                    <span class="label"><?= /* @noEscape */ $filterItem->getOptionLabel() ?></span>
+                        <span class="count"><?= /* @noEscape */ $filterItem->getCount()?>
+                            <span class="filter-count-label">
+                                <?php $title = ($filterItem->getCount() == 1) ? __('item') : __('items');?>
+                                <?= $block->escapeHtml($title) ?>
+                            </span>
+                        </span>
+                </a>
+            <?php else :?>
+                <span class="label"><?= /* @noEscape */ $filterItem->getOptionLabel() ?></span>
+                    <span class="count"><?= /* @noEscape */ $filterItem->getCount() ?>
+                        <span class="filter-count-label">
+                            <?php $title = ($filterItem->getCount() == 1) ? __('item') : __('items');?>
+                            <?= $block->escapeHtml($title) ?>
+                        </span>
+                    </span>
+            <?php endif; ?>
+        </li>
+        <?php endforeach ?>
+    </form>
+</ol>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_ShopbyLite
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\CatalogSearch\Block\SearchResult\ListProduct"
+                 type="Magento\Catalog\Block\Product\ListProduct">
+        <arguments>
+            <argument name="catalogLayer" xsi:type="object">Magento\Catalog\Model\Layer\Search</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory"
+                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\ShopbyLite\Model\ResourceModel\Fulltext\SearchCollection"
+                 type="Amasty\ShopbyLite\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">quick_search_container</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory"
+                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\ShopbyLite\Model\ResourceModel\Fulltext\SearchCollection"
+                 type="Amasty\ShopbyLite\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">quick_search_container</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="elasticsearchCategoryCollectionFactory"
+                 type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amElasticsearchCategoryCollectionFactory"
+                 type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="elasticsearchFulltextSearchCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amElasticsearchFulltextSearchCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\ShopbyLite\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+</config>
